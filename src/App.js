@@ -3,9 +3,6 @@ import Recipe from './Recipe'
 import './App.css';
 
 const App = () => {
-  const APP_ID = '60e06924'
-  const APP_KEY = 'b710f41ed602e6c9d5c84ee1f9e9e1bf'
-
   const [recipes, setRecipes] = useState([])
   const [search, setSearch] = useState("")
   const [query, setQuery] = useState("chicken")
@@ -15,11 +12,9 @@ const App = () => {
   }, [query])
 
   const getRecipes = async () => {
-    const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`)
-
+    const response = await fetch(`../.netlify/functions/recipesFetch?query=${query}`);
     const data = await response.json()
     setRecipes(data.hits)
-    console.log(data.hits);
   }
 
   const updateSearch = e => {
